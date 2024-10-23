@@ -550,25 +550,25 @@
  <details><summary><font size="6"><b>11) Filter VCF file and extract SNP data</b></font></summary>
   <br>
   <br>    
- The next step is to clean the VCF so we retain only high quality SNP sites we can be confident in.
+ The next step is to clean the VCF so we retain only high quality SNP sites we can be confident in. The script applies the following filters:
  <br> 
  
- - The following script keeps only biallelic SNPs. 
- - It removes SNPs that are less than 250 bp from the start or end of a contig or chromosome
- - It then filters to remove SNPs informed by less than a user specified number of reads, quality threshold and genotyped for less than a specified number of individuals.
+ - Only biallelic SNPs are retained. 
+ - It removes SNPs that are less than 250 bp from the start or end of a contig or chromosome.
+ - It removes SNPs informed by less than a user specified number of reads, quality threshold and genotyped for less than a specified number of individuals.
  - Users pick a minimum allele frequency (MAF) below which variants will be removed, as these ones are difficult to tell apart from sequencing errors.
- - Remove sites if the average genotype depth (across individuals) is greater than X times the average genotype depth (considering all sites). X is a user specified number.
+ - Sites are removed if the average genotype depth (across individuals) is greater than X times the average genotype depth (considering all sites), where X is a user specified number number.
  - To keep only the most diverse SNP sites we also filter to keep only sites which have called at least one individual that is homozygous for the reference, one that is homozygous for the alternate and one heterozygous individual.
- - Remove sites if they are highly correlated and adjacent to one another based on a user-defined correlation coefficient and sliding window length
- <br>  
- 
+ - Sites are removed if they are highly correlated and adjacent to one another, based on a user-defined correlation coefficient and sliding window length.
+  <br>
+  
  The user then specifies how many SNPs they want to randomly extract from the VCF to take forward for primer design.
- 
+  <br>
  <b> You must supply the command line with the 10 following parameters:</b><br>
   - (-o) the name you want to call your VCF, this should match the name you specified in the previous step
   - (-g) the name of the genome which was used to align the data
   - (-r) minimum depth needed to retain a SNP site
-  - (-q )the minimum quality threshold for a SNP to be retained (all SNPs with a lower quality score will be excluded
+  - (-q) the minimum quality threshold for a SNP to be retained (all SNPs with a lower quality score will be excluded
   - (-i) the minimum number of individuals typed to retain a SNP
   - (-m) the MAF
   - (-a) a multiplier; sites will be excluded when the average genotype depth (across individuals) is more than (-a) times greater than the overall average genotype depth considering all sites.
@@ -585,9 +585,11 @@
   Intermediate filtering files will be written to your 'vcf' folder and final files for primer design will be in a folder titled 'primer_design'.
   <br>
   
+  <br>
   We recommend looking at the output log ('09_filter_vcf.out.log'). Following each filter, an explanation of the filter, a file name and the total number of remaining SNPs are printed to the log, providing an indication of drop out at each stage. We expect to see a fairly large reduction in the number of SNPs at most stages, but after the final filter (eexclusion of correlated adjacent SNPs) there will hopefully still be several thousand SNPs to choose from. 
   <br>
   
+  <br>
   If the number of SNPs following filtering is less than the subsampling number (-n), subsampling will fail. The log file will produce an error indicating this. If the number of SNPs following filtering is less than two times greater than the subsampling number (-n), subsampling will proceed, but the output log will give a warning and suggest that the user should inspect drop out and relax some filters. The error file (09_filter_vcf.err.log) may provide further information if troubleshooting is required.
   
   
