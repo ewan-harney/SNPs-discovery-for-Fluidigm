@@ -551,8 +551,8 @@
   <br>
   <br>    
  The next step is to clean the VCF so we retain only high quality SNP sites we can be confident in. The script applies the following filters:
- <br> 
- 
+ <br>  
+  
  - Only biallelic SNPs are retained. 
  - It removes SNPs that are less than 250 bp from the start or end of a contig or chromosome.
  - It removes SNPs informed by less than a user specified number of reads, quality threshold and genotyped for less than a specified number of individuals.
@@ -561,8 +561,8 @@
  - To keep only the most diverse SNP sites we also filter to keep only sites which have called at least one individual that is homozygous for the reference, one that is homozygous for the alternate and one heterozygous individual.
  - Sites are removed if they are highly correlated and adjacent to one another, based on a user-defined correlation coefficient and sliding window length.
   <br>
-  
  The user then specifies how many SNPs they want to randomly extract from the VCF to take forward for primer design.
+  
   <br>
  <b> You must supply the command line with the 10 following parameters:</b><br>
   - (-o) the name you want to call your VCF, this should match the name you specified in the previous step
