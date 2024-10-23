@@ -112,11 +112,11 @@ printf "Number of SNPs in ${parO}.bi_snps.not_ends.NOGTDP${parR}.Q${parQ}.SAMP${
 zgrep -vc '^#' $parO.bi_snps.not_ends.NOGTDP$parR.Q$parQ.SAMP$parI.MAF$parM.vcf.gz
 
 # STEP 5: Filter by average genotype depth
-printf "\nSTEP 5: Considering all sites, the average genotype read depth is :\n"
+printf "\nSTEP 5: Considering all sites, the average genotype read depth (as an integer) is :\n"
 # calculate the average depth (as an integer) across individuals across all sites. Save it as an environment variable and print it
 AVDEPTH="$(bcftools query -f '%CHROM\t%POS\t%AN\t%DP\n' $parO.bi_snps.not_ends.NOGTDP$parR.Q$parQ.SAMP$parI.MAF$parM.vcf.gz | awk '{if ($3 > 0) sum_depth += 2 * ($4 / $3); count++} END {if (count > 0) print int(sum_depth/count)}')"
 echo ${AVDEPTH}
-AvFilt=$((parA * AVDEPTH))
+AvFilt=$(echo "scale=2; $parA * $AVDEPTH" | bc)
 # exclude SNPs if they have an average depth (across all individuals) that is greater than parA times the average across all sites
 printf "Retaining SNPs if the average genotype depth for a given site is less than $AvFilt (calculated as $parA times $AVDEPTH).\n"
 bcftools view -e "AVG(FMT/DP) > $AvFilt" -O z $parO.bi_snps.not_ends.NOGTDP$parR.Q$parQ.SAMP$parI.MAF$parM.vcf.gz > $parO.bi_snps.not_ends.NOGTDP$parR.Q$parQ.SAMP$parI.MAF$parM.AVMDP$AvFilt.vcf.gz
