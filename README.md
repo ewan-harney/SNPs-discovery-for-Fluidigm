@@ -565,7 +565,8 @@
   
   <br>
  <b> You must supply the command line with the 10 following parameters:</b><br>
- - vcf (-o) the name you want to call your VCF, this should match the name you specified in the previous step
+  
+ - (-o) the name you want to call your VCF, this should match the name you specified in the previous step
  - genome (-g) the name of the genome which was used to align the data
  - read depth (-r) minimum depth needed to retain a SNP site
  - quality (-q) the minimum quality threshold for a SNP to be retained (all SNPs with a lower quality score will be excluded
