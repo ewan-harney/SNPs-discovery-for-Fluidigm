@@ -573,7 +573,7 @@
  - (-q) the minimum quality threshold for a SNP to be retained (all SNPs with a lower quality score will be excluded,
  - (-i) the minimum number of individuals typed to retain a SNP,
  - (-m) the minimum allele frequency,
- - (-a) a multiplier; sites will be excluded when the average genotype depth is more than (-a) times greater than the overall average genotype depth considering all sites. E.g. if the average genotype depth across all sites is 20 and (-a) is set to 2, sites where the average genotype depth is > 40 will be excluded,
+ - (-a) a multiplier; sites will be excluded when the average genotype depth (per site) is more than this number times greater than the average genotype depth (considering all sites),
  - (-c) the correlation coefficient R2; sites with an R2 above this value (within a certain window) will be removed, 
  - (-w) the window for assessing correlation between sites; it can be set to a number of sites with an interger alone, or base pairs by adding bp, kb, or Mb after an integer (without any space),
  - (-n) number of SNPs to subsample for primer design; it is advisiable to extract more (up to a third more) than will ultimately be needed for the final genotyping,
