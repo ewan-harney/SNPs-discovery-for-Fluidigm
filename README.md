@@ -561,20 +561,20 @@
  - To keep only the most diverse SNP sites we also filter to keep only sites which have called at least one individual that is homozygous for the reference, one that is homozygous for the alternate and one heterozygous individual.
  - Sites are removed if they are highly correlated and adjacent to one another, based on a user-defined correlation coefficient and sliding window length.
   <br>
- The user then specifies how many SNPs they want to randomly extract from the VCF to take forward for primer design.
+  The user then specifies how many SNPs they want to randomly extract from the VCF to take forward for primer design.
   
   <br>
  <b> You must supply the command line with the 10 following parameters:</b><br>
-  - (-o) the name you want to call your VCF, this should match the name you specified in the previous step
-  - (-g) the name of the genome which was used to align the data
-  - (-r) minimum depth needed to retain a SNP site
-  - (-q) the minimum quality threshold for a SNP to be retained (all SNPs with a lower quality score will be excluded
-  - (-i) the minimum number of individuals typed to retain a SNP
-  - (-m) the MAF
-  - (-a) a multiplier; sites will be excluded when the average genotype depth (across individuals) is more than (-a) times greater than the overall average genotype depth considering all sites.
-  - (-c) the correlation coefficient R2; sites with an R2 above this value (within a certain window) will be removed 
-  - (-w) the window for assessing correlation between sites; it can be set to a number of sites with an interger alone, or base pairs by adding bp, kb, or Mb after an integer (without any space)
-  - (-n) number of SNPs to subsample for primer design; it is advisiable to extract more (up to a third more) than will ultimately be needed for the final genotyping
+ - (-o) the name you want to call your VCF, this should match the name you specified in the previous step
+ - (-g) the name of the genome which was used to align the data
+ - (-r) minimum depth needed to retain a SNP site
+ - (-q) the minimum quality threshold for a SNP to be retained (all SNPs with a lower quality score will be excluded
+ - (-i) the minimum number of individuals typed to retain a SNP
+ - (-m) the MAF
+ - (-a) a multiplier; sites will be excluded when the average genotype depth (across individuals) is more than (-a) times greater than the overall average genotype depth considering all sites.
+ - (-c) the correlation coefficient R2; sites with an R2 above this value (within a certain window) will be removed 
+ - (-w) the window for assessing correlation between sites; it can be set to a number of sites with an interger alone, or base pairs by adding bp, kb, or Mb after an integer (without any space)
+ - (-n) number of SNPs to subsample for primer design; it is advisiable to extract more (up to a third more) than will ultimately be needed for the final genotyping
   <br>
   <br>
   
