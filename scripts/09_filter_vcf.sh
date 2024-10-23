@@ -112,11 +112,11 @@ printf "Number of SNPs in ${parO}.bi_snps.not_ends.NOGTDP${parR}.Q${parQ}.SAMP${
 zgrep -vc '^#' $parO.bi_snps.not_ends.NOGTDP$parR.Q$parQ.SAMP$parI.MAF$parM.vcf.gz
 
 # STEP 5: Filter by average genotype depth
-printf "\nSTEP 5: Considering all sites, the average genotype read depth (as an integer) is :\n"
+printf "\nSTEP 5: Considering all sites, the average genotype read depth is :\n"
 # calculate the average depth (as an integer) across individuals across all sites. Save it as an environment variable and print it
 AVDEPTH="$(bcftools query -f '%CHROM\t%POS\t%AN\t%DP\n' $parO.bi_snps.not_ends.NOGTDP$parR.Q$parQ.SAMP$parI.MAF$parM.vcf.gz | awk '{if ($3 > 0) sum_depth += 2 * ($4 / $3); count++} END {if (count > 0) print int(sum_depth/count)}')"
 echo ${AVDEPTH}
-AvFilt=$(echo "scale=2; $parA * $AVDEPTH" | bc)
+AvFilt=$((parA * AVDEPTH))
 # exclude SNPs if they have an average depth (across all individuals) that is greater than parA times the average across all sites
 printf "Retaining SNPs if the average genotype depth for a given site is less than $AvFilt (calculated as $parA times $AVDEPTH).\n"
 bcftools view -e "AVG(FMT/DP) > $AvFilt" -O z $parO.bi_snps.not_ends.NOGTDP$parR.Q$parQ.SAMP$parI.MAF$parM.vcf.gz > $parO.bi_snps.not_ends.NOGTDP$parR.Q$parQ.SAMP$parI.MAF$parM.AVMDP$AvFilt.vcf.gz
@@ -163,6 +163,7 @@ then
 else
     printf "ERROR: Unable to determine how many SNPs have been filtered.\n"
 fi
+
 # Carry out subsampling if there are enough SNPs
 if [ $PRUNE -ge $parN ]
 then
@@ -180,6 +181,7 @@ then
     bcftools query -f '%CHROM\t%POS\t%REF\t%ALT[\t%GT]\n' $parO.bi_snps.not_ends.NOGTDP$parR.Q$parQ.SAMP$parI.MAF$parM.AVMDP$AvFilt.homref.alt.het.cor$parC.win$parW.$parN.vcf.gz > $src/primer_design/$parN.SNPs_info.txt
     printf "A subset of ${parN} SNPs have been selected for primer design. Please refer to the files primer_design/${parN}.SNPs.fasta and primer_design/${parN}.SNPs_info.txt. Filtration and subsampling complete.\n"
 elif [ $PRUNE -lt $parN ]
+then
     printf "\nERROR: Unable to subsample SNPs for primer design because there were too few left after filtration.\n"
 else
     printf "\nERROR: Unable to complete filtration and subsampling. Please inspect above results and file 09_filter_vcf.err.log"
