@@ -581,7 +581,12 @@
   <br>
   
   ```
-  qsub scripts/09_filter_vcf.sh -o monkparakeet -g GCA_017639245.1_MMon_1.0_genomic.fna -r 3 -q 20 -i 3 -m 0.3 -a 2 -c 0.2 -w 5kb -n 108 
+  qsub scripts/09_filter_vcf.sh -o monkparakeet -g GCA_017639245.1_MMon_1.0_genomic.fna \
+  -r 3 -q 20 -i 3 \
+  -m 0.3 \
+  -a 2 \
+  -c 0.2 -w 5kb \
+  -n 108 
   ```
   <br>
   Intermediate filtering files will be written to your 'vcf' folder and final files for primer design will be in a folder titled 'primer_design'.
