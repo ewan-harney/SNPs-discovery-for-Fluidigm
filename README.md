@@ -550,8 +550,8 @@
  <details><summary><font size="6"><b>11) Filter VCF file and extract SNP data</b></font></summary>
   <br>
   <br>    
- The next step is to clean the VCF so we retain only high quality SNP sites we can be confident in. The script applies the following filters:
- <br>  
+ <b> The next step is to clean the VCF so we retain only high quality SNP sites we can be confident in. The script applies the following filters::</b>
+ <br>
   
  - Only biallelic SNPs are retained. 
  - It removes SNPs that are less than 250 bp from the start or end of a contig or chromosome.
