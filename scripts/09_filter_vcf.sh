@@ -20,7 +20,7 @@ helpFunction()
    echo -e "\t-o the name you want to call your VCF, this should match the name you specified in the previous step"
    echo -e "\t-g the name of the genome which was used to align the data"
    echo -e "\t-r minimum depth needed to retain a SNP site"
-   echo -e "\t-q the minimum quality threshold for a SNP to be retained (all SNPs with a lower quality score will be excluded"
+   echo -e "\t-q the minimum quality threshold for a SNP to be retained (all SNPs with a lower quality score will be excluded)"
    echo -e "\t-i the minimum number of individuals typed to retain a SNP"
    echo -e "\t-m the MAF"
    echo -e "\t-a exclude sites where the average genotype depth is below this threshold"
